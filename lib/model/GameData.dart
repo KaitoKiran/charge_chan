@@ -61,7 +61,7 @@ class GameControl {
     if(vibe == true){
       Vibration.vibrate(duration: load*200);
       while (load > 0) {
-        d.changeText("Vibriere");
+        d.changeText("Vibrationen");
         sleep(const Duration(milliseconds: 200));
         load--;
       }
