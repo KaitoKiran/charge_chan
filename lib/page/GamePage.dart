@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game/model/GameData.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'dart:io';
 
 
 class GamePage extends StatelessWidget {
@@ -13,24 +14,30 @@ class GamePage extends StatelessWidget {
         body: ScopedModelDescendant<GameData>(
             builder: (context, child, GameData model) =>
             Center(
-              child: _GameText(model)
+              child: _GamePaint(model)
             )
         )
     );
   }
 }
 
-class _GameText extends StatelessWidget {
+class _GamePaint extends StatelessWidget {
 
   final GameData model;
-  _GameText(this.model);
+  _GamePaint(this.model);
 
   @override
   Widget build(BuildContext context) {
-
-    TextStyle style = Theme.of(context).textTheme.headline4;
     return Center(
-        child: Text(model.txt, style: style)
+      child: getImage(model.loadingState)
     );
+  }
+
+  Image getImage(LoadingState state) {
+    switch (state) {
+      case LoadingState.discharging: return Image.asset("flutter_chan.gif");
+      case LoadingState.charging: return Image.asset("flutter_chan_relax.png");
+      case LoadingState.empty: return Image.asset("flutter_chan_relax.png");
+    }
   }
 }

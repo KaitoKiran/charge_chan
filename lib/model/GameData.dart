@@ -4,11 +4,20 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:shake/shake.dart';
 import 'package:vibration/vibration.dart';
 
+enum LoadingState {empty, charging, discharging }
+
 class GameData extends Model {
+  LoadingState _loadingState = LoadingState.empty;
+
+  LoadingState get loadingState => _loadingState;
+  void set loadingState(LoadingState newState) { _loadingState = newState; notifyListeners(); }
+
+
    ShakeDetector d;
    int load = 0;
-   String txt = "Schüttle bitte";
+   //String txt = "Schüttle bitte";
    GameControl control;
+//   int state = 0;
 
 
    GameData(){
@@ -28,22 +37,19 @@ class GameData extends Model {
      int temp = load;
      Timer(const Duration(seconds: 2), (){
        if(temp + 1 <= load){
-         changeText("Werde Geschüttelt");
+         //changeText("Werde Geschüttelt");
+         loadingState = LoadingState.charging;
          notifyListeners();
        }
        else{
          control.vibratePhone(load, this);
+         notifyListeners();
        }
      });
    }
 
    void finishUp(){
      d.stopListening();
-   }
-
-   void changeText(String t){
-     txt = t;
-     notifyListeners();
    }
 
 }
@@ -59,13 +65,11 @@ class GameControl {
 
   void vibratePhone(int load, GameData d){
     if(vibe == true){
+      d.loadingState = LoadingState.discharging;
       Vibration.vibrate(duration: load*200);
-      while (load > 0) {
-        d.changeText("Vibrationen");
-        sleep(const Duration(milliseconds: 200));
-        load--;
-      }
-      d.changeText("bitte schüttel mich");
+      Timer(Duration(milliseconds: load*200), (){
+        d.loadingState = LoadingState.empty;
+      });
     }
   }
 }
