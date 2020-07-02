@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shake/shake.dart';
 import 'package:vibration/vibration.dart';

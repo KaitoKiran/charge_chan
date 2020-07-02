@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game/page/GamePage.dart';
+import 'package:charge_chan/page/GamePage.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/GameData.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_game/model/GameData.dart';
+import 'package:charge_chan/model/GameData.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'dart:io';
 
@@ -9,7 +9,7 @@ class GamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text("Shake it up")
+            title: Text("Charge Chan")
         ),
         body: ScopedModelDescendant<GameData>(
             builder: (context, child, GameData model) =>
@@ -35,9 +35,9 @@ class _GamePaint extends StatelessWidget {
 
   Image getImage(LoadingState state) {
     switch (state) {
-      case LoadingState.discharging: return Image.asset("flutter_chan.gif");
-      case LoadingState.charging: return Image.asset("flutter_chan_relax.png");
-      case LoadingState.empty: return Image.asset("flutter_chan_relax.png");
+      case LoadingState.charging: return Image.asset("assets/flutter_chan.gif");
+      case LoadingState.discharging: return Image.asset("assets/flutter_chan_relax.png");
+      case LoadingState.empty: return Image.asset("assets/flutter_chan_relax.png");
     }
   }
 }
