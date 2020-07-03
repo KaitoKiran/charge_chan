@@ -12,44 +12,44 @@ class GameData extends Model {
   void set loadingState(LoadingState newState) { _loadingState = newState; notifyListeners(); }
 
 
-   ShakeDetector d;
-   int load = 0;
-   //String txt = "Schüttle bitte";
-   GameControl control;
+  ShakeDetector d;
+  int load = 0;
+  //String txt = "Schüttle bitte";
+  GameControl control;
 //   int state = 0;
 
 
-   GameData(){
+  GameData(){
 
-     control = GameControl();
+    control = GameControl();
 
-     d = ShakeDetector.autoStart(
-       onPhoneShake: () {
-         load++;
-         print(load);
-         process();
-       }
-     );
-   }
+    d = ShakeDetector.autoStart(
+        onPhoneShake: () {
+          load++;
+          print(load);
+          process();
+        }
+    );
+  }
 
-   void process(){
-     int temp = load;
-     Timer(const Duration(milliseconds: 1500), (){
-       if(temp + 1 <= load){
-         //changeText("Werde Geschüttelt");
-         loadingState = LoadingState.charging;
-         notifyListeners();
-       }
-       else{
-         control.vibratePhone(load, this);
-         notifyListeners();
-       }
-     });
-   }
+  void process(){
+    int temp = load;
+    Timer(const Duration(milliseconds: 1200), (){
+      if(temp + 1 <= load){
+        //changeText("Werde Geschüttelt");
+        loadingState = LoadingState.charging;
+        notifyListeners();
+      }
+      else{
+        control.vibratePhone(load, this);
+        notifyListeners();
+      }
+    });
+  }
 
-   void finishUp(){
-     d.stopListening();
-   }
+  void finishUp(){
+    d.stopListening();
+  }
 
 }
 
@@ -65,8 +65,9 @@ class GameControl {
   void vibratePhone(int load, GameData d){
     if(vibe == true){
       d.loadingState = LoadingState.discharging;
-      Vibration.vibrate(duration: load*200);
-      Timer(Duration(milliseconds: load*200), (){
+      Vibration.vibrate(duration: load*300);
+      Timer(Duration(milliseconds: load*300), (){
+        d.load = 0;
         d.loadingState = LoadingState.empty;
       });
     }
