@@ -9,7 +9,7 @@ class GamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            title: Text("Charge Chan")
+            title: Text("Charge-Chan")
         ),
         body: ScopedModelDescendant<GameData>(
             builder: (context, child, GameData model) =>
@@ -36,7 +36,7 @@ class _GamePaint extends StatelessWidget {
   Image getImage(LoadingState state) {
     switch (state) {
       case LoadingState.charging: return Image.asset("assets/flutter_chan.gif");
-      case LoadingState.discharging: return Image.asset("assets/flutter_chan_relax.png");
+      case LoadingState.discharging: return Image.asset("assets/flutter_chan_laser.gif");
       case LoadingState.empty: return Image.asset("assets/flutter_chan_relax.png");
     }
   }

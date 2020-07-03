@@ -34,7 +34,7 @@ class GameData extends Model {
 
    void process(){
      int temp = load;
-     Timer(const Duration(seconds: 2), (){
+     Timer(const Duration(milliseconds: 1500), (){
        if(temp + 1 <= load){
          //changeText("Werde Geschüttelt");
          loadingState = LoadingState.charging;

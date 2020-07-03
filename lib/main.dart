@@ -21,7 +21,7 @@ class _GameState extends State<flutterGame>{
     return ScopedModel<GameData>(
         model: model,
         child: MaterialApp(
-            title: 'Shake it Baby',
+            title: 'Charge-Chan',
             theme: ThemeData(
               primarySwatch: Colors.red,
             ),
